@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Details | Ocean Wellness Club</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #4e7b7b;
+            --secondary: #a3c4c4;
+            --light: #f5f7f7;
+            --dark: #2c3e50;
+            --accent: #d6e4e4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--secondary);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-large {
+            padding: 15px 40px;
+            font-size: 18px;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+            font-weight: 400;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('/api/placeholder/1200/400') center/cover no-repeat;
+            text-align: center;
+            padding: 150px 0 80px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Product Details */
+        .product-details {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        
+        .product-gallery {
+            position: sticky;
+            top: 100px;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .thumbnail-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .thumbnail {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail:hover {
+            opacity: 0.8;
+        }
+        
+        .product-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .price-large {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .product-description {
+            margin-bottom: 30px;
+        }
+        
+        .features-list {
+            margin-bottom: 30px;
+        }
+        
+        .features-list h3 {
+            margin-bottom: 15px;
+        }
+        
+        .features-list ul {
+            padding-left: 20px;
+        }
+        
+        .features-list li {
+            margin-bottom: 10px;
+        }
+        
+        .cta-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        /* Purchase Steps */
+        .purchase-steps {
+            margin: 50px 0;
+            padding: 30px;
+            background-color: var(--light);
+            border-radius: 10px;
+        }
+        
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            position: relative;
+        }
+        
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            width: 120px;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .step-title {
+            font-size: 0.9rem;
+            text-align: center;
+            color: var(--dark);
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background-color: var(--accent);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .accordion-item {
+            margin-bottom: 15px;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .accordion-header {
+            background-color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accordion-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        
+        .accordion-icon {
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-content {
+            background-color: white;
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .accordion-item.active .accordion-content {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Related Products */
+        .related-products {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .related-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .related-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .related-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .related-content {
+            padding: 20px;
+        }
+        
+        .related-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .related-price {
+            font-weight: bold;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        
+        /* Call to Action */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(rgba(78, 123, 123, 0.9), rgba(78, 123, 123, 0.9)), url('/api/placeholder/1200/400') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta .btn {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .cta .btn:hover {
+            background-color: var(--accent);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+        
+        /* Media Queries */
+        @media screen and (max-width: 992px) {
+            .product-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-gallery {
+                position: static;
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                height: 92vh;
+                top: 80px;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links li {
+                opacity: 0;
+                margin: 20px 0;
+            }
+            
+            .burger {
+                display: block;
+            }
+            
+            .nav-active {
+                transform: translateX(0%);
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .steps-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+            }
+            
+            .steps-container::before {
+                display: none;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @keyframes navLinkFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Toggle */
+        .toggle .line1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .toggle .line2 {
+            opacity: 0;
+        }
+        
+        .toggle .line3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Ocean <span>Wellness</span> Club</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Services</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#testimonials">Testimonials</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Ocean Executive</h1>
+            <p>VIP Coaching + Done-For-You Services</p>
+        </div>
+    </header>
+
+    <!-- Product Details Section -->
+    <section class="product-details">
+        <div class="container">
+            <div class="product-container">
+                <div class="product-gallery">
+                    <img src="/api/placeholder/600/400" alt="Ocean Executive Program" class="main-image">
+                    <div class="thumbnail-container">
+                        <img src="/api/placeholder/200/200" alt="Ocean Executive Coaching" class="thumbnail">
+                        <img src="/api/placeholder/200/200" alt="Wellness Assessment" class="thumbnail">
+                        <img src="/api/placeholder/200/200" alt="Personalized Protocol" class="thumbnail">
+                    </div>
+                </div>
+                
+                <div class="product-info">
+                    <div class="tag-container">
+                        <span class="tag">VIP</span>
+                        <span class="tag">Executive</span>
+                        <span class="tag">Premium</span>
+                    </div>
+                    
+                    <h1>Ocean Executive Program</h1>
+                    <div class="price-large">$1,997/month</div>
+                    
+                    <div class="product-description">
+                        <p>The Ocean Executive Program is our most comprehensive wellness solution, designed specifically for high-performing executives, entrepreneurs, and busy professionals who require maximum support with minimal time investment.</p>
+                        <p>This exclusive VIP offering combines personalized coaching with done-for-you services to ensure you achieve optimal health and performance while navigating your demanding schedule.</p>
+                    </div>
+                    
+                    <div class="features-list">
+                        <h3>What's Included:</h3>
+                        <ul>
+                            <li><strong>Weekly 1:1 Coaching Sessions (60 min)</strong> - Focused strategy and implementation sessions with your dedicated wellness coach</li>
+                            <li><strong>Comprehensive Health Assessment</strong> - In-depth evaluation of your current health status, goals, and challenges</li>
+                            <li><strong>Personalized Wellness Protocol</strong> - Custom-designed plan addressing your specific needs and objectives</li>
+                            <li><strong>Priority Communication</strong> - Direct access to your coach with responses within 2 hours during business hours</li>
+                            <li><strong>Custom Meal Planning</strong> - Weekly meal plans with grocery lists tailored to your preferences and nutritional needs</li>
+                            <li><strong>Sleep Optimization Protocol</strong> - Strategies to improve sleep quality and recovery</li>
+                            <li><strong>Stress Management Techniques</strong> - Evidence-based approaches to managing stress and enhancing resilience</li>
+                            <li><strong>Quarterly Health Assessments</strong> - Regular progress evaluations and protocol adjustments</li>
+                            <li><strong>Travel Nutrition & Fitness Guides</strong> - Custom plans for maintaining your wellness routine while traveling</li>
+                            <li><strong>24/7 Emergency Support</strong> - Around-the-clock access for urgent wellness concerns</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="features-list">
+                        <h3>Perfect For:</h3>
+                        <ul>
+                            <li>C-suite executives and entrepreneurs with demanding schedules</li>
+                            <li>High-performers seeking optimal health and sustained energy</li>
+                            <li>Leaders looking to model wellness while maintaining peak productivity</li>
+                            <li>Professionals who want comprehensive support without time-consuming research</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cta-container">
+                        <a href="#" class="btn btn-large">Enroll Now</a>
+                        <a href="#" class="btn btn-secondary btn-large">Schedule Consultation</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="purchase-steps">
+                <h2>How It Works</h2>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Initial Consultation</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Health Assessment</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Protocol Creation</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Implementation</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-title">Ongoing Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>What makes Ocean Executive different from other coaching programs?</h3>
+                        <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Ocean Executive stands apart through its comprehensive approach that combines evidence-based coaching with done-for-you services. Unlike generic wellness programs, we customize every aspect of your protocol based on your unique biochemistry, lifestyle, and goals. Our team includes specialists in functional medicine, performance psychology, and behavioral science who collaborate to address the root causes of your health challenges, not just symptoms.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>How much time will I need to commit each week?</h3>
+                        <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>We design the Ocean Executive program with busy professionals in mind. Beyond your weekly 60-minute coaching session, implementation typically requires 2-3 hours per week, which includes your personalized movement practice, stress management routines, and meal preparation (though much of this can be outsourced if desired). Our done-for-you elements are specifically crafted to minimize your time investment while maximizing results.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>What results can I expect and how quickly?</h3>
+                        <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Most Ocean Executive clients report noticeable improvements in energy levels and mental clarity within the first 2-3 weeks. More significant results typically emerge within 90 days, including improved sleep quality, enhanced stress resilience, sustainable weight management, and optimized biomarkers. Long-term benefits include improved longevity markers, sustained high performance, and the establishment of habits that support lifelong wellness.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>Can the program accommodate my travel schedule?</h3>
+                        <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Absolutely. The Ocean Executive program is specifically designed for professionals who travel frequently. Your coach will develop custom travel protocols including hotel workout plans, restaurant ordering guides for different cuisines, jet lag mitigation strategies, and sleep optimization techniques for different time zones. Coaching sessions can be conducted virtually from anywhere in the world, and your coach will adjust your protocol based on your changing schedule and environment.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>Is there a minimum commitment period?</h3>
+                        <div class="accordion-icon"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>We recommend a minimum three-month commitment to the Ocean Executive program to experience meaningful, sustainable results. Lasting transformation takes time, and our approach is designed to create long-term change rather than quick fixes. Many of our clients choose to continue with the program long-term, transitioning to a maintenance phase after achieving their initial goals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products Section -->
+    <section class="related-products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Related Programs</h2>
+                <p>Explore other wellness solutions that might fit your needs</p>
+            </div>
+            
+            <div class="related-grid">
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('/api/placeholder/400/300');"></div>
+                    <div class="related-content">
+                        <h3>Ocean Elite</h3>
+                        <p>VIP Coaching for high-achievers seeking personalized strategies to optimize health and performance.</p>
+                        <div class="related-price">$1,497/month</div>
+                        <a href="product-details.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('/api/placeholder/400/300');"></div>
+                    <div class="related-content">
+                        <h3>Ocean Empower</h3>
+                        <p>Accountability Program for those who know what to do but need support staying consistent.</p>
+                        <div class="related-price">$997/month</div>
+                        <a href="product-details.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-image" style="background-image: url('/api/placeholder/400/300');"></div>
+                    <div class="related-content">
+                        <h3>Ocean Embark</h3>
+                        <p>Develop a Plan for those just beginning their wellness journey who need clarity and direction.</p>
+                        <div class="related-price">$497/month</div>
+                        <a href="product-details.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Wellness Journey?</h2>
+            <p>Take the first step toward optimized health and peak performance. Schedule your complimentary consultation today.</p>
+            <a href="#" class="btn">Schedule Your Consultation</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Ocean Wellness Club</h3>
+                    <p>Premium functional health coaching for high-performing individuals seeking to optimize their well-being and productivity.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Services</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#testimonials">Testimonials</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Programs</h3>
+                    <ul class="footer-links">
+                        <li><a href="product-details.html">Ocean Executive</a></li>
+                        <li><a href="product-details.html">Ocean Elite</a></li>
+                        <li><a href="product-details.html">Ocean Empower</a></li>
+                        <li><a href="product-details.html">Ocean Embark</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to receive wellness tips, exclusive offers, and updates.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your email address" required>
+                        </div>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Ocean Wellness Club. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation Toggle
+        const navSlide = () => {
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.nav-links li');
+            
+            burger.addEventListener('click', () => {
+                // Toggle Nav
+                nav.classList.toggle('nav-active');
+                
+                // Animate Links
+                navLinks.forEach((link, index) => {
+                    if (link.style.animation) {
+                        link.style.animation = '';
+                    } else {
+                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                    }
+                });
+                
+                // Burger Animation
+                burger.classList.toggle('toggle');
+            });
+        }
+        
+        navSlide();
+        
+        // Accordion functionality
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            
+            header.addEventListener('click', () => {
+                // Close all other accordion items
+                accordionItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Product gallery functionality
+        const mainImage = document.querySelector('.main-image');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                const src = thumbnail.getAttribute('src');
+                mainImage.setAttribute('src', src);
+            });
+        });
+    </script>
+</body>
+</html>
+        
